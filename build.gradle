@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'io.freefair.lombok' version '8.11'
+    id 'org.liquibase.gradle' version '2.2.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+// how to enable assert keyword on JVM Quarkus
+dependencies {
+    implementation 'io.quarkus:quarkus-rest-jackson'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-vertx'
+    implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'io.quarkus:quarkus-hibernate-orm-panache'
+    implementation 'io.quarkiverse.jdbc:quarkus-jdbc-sqlite:3.0.11'
+    implementation 'org.xerial:sqlite-jdbc:3.49.1.0'
+    implementation 'io.quarkus:quarkus-liquibase'
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-arc'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.24.0'
+    liquibaseRuntime 'org.xerial:sqlite-jdbc:3.49.1.0'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+}
+
+group 'br.com.bagnascojhoel'
+version 'latest'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+}
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+liquibase {
+    activities {
+        main {
+            url "jdbc:sqlite:kwik.db"
+        }
+    }
+}
+
+quarkusDev {
+    jvmArgs = ["-enableassertions"]
+}
