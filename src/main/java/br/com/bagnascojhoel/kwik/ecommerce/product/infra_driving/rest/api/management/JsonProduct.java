@@ -33,16 +33,12 @@ public class JsonProduct {
 
   private JsonMetadata metadata;
 
-
-  public static JsonProduct create(
-      @Nonnull Product product) {
+  public static JsonProduct create(@Nonnull Product product) {
     return JsonProduct.builder()
         .id(product.getId().value())
         .name(product.getName())
         .description(product.getDescription())
-        .photoUrls(product.getPhotos().stream()
-            .map(Photo::getUrl)
-            .toList())
+        .photoUrls(product.getPhotos().stream().map(Photo::getUrl).toList())
         .state(product.getState())
         .price(JsonAmount.ofBrl(product.getPriceInBrl()))
         .metadata(JsonMetadataImpl.create(product))

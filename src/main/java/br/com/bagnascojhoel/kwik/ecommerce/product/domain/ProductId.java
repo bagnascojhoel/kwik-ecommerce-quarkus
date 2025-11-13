@@ -17,5 +17,4 @@ public class ProductId implements Boxed<Long> {
   public Long value() {
     return id;
   }
-
 }

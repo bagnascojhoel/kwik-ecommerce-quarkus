@@ -32,5 +32,4 @@ public class Author {
     this.modifiedBy = null;
     this.modifiedAt = null;
   }
-
 }

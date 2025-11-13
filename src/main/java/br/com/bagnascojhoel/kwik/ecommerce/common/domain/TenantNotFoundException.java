@@ -12,5 +12,4 @@ public class TenantNotFoundException extends KwikEcommerceException {
     super("Tenant not found", "tenant-not-found");
     this.tenantId = tenantId;
   }
-
 }

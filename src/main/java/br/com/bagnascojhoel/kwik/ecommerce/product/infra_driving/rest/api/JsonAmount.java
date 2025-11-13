@@ -17,5 +17,4 @@ public class JsonAmount {
   public static JsonAmount ofBrl(BigDecimal amount) {
     return new JsonAmount(amount, Currency.BRL);
   }
-
 }

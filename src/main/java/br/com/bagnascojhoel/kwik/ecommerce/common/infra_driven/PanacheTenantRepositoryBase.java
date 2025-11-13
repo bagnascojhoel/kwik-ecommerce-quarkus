@@ -10,8 +10,7 @@ public interface PanacheTenantRepositoryBase<Entity, Id> extends PanacheReposito
 
   @GenerateBridge
   default Optional<Entity> findByIdOptional(TenantId tenantId, Id id) {
-    return this.find("tenantId = ?1 and id = ?2", tenantId, id)
-        .firstResultOptional();
+    return this.find("tenantId = ?1 and id = ?2", tenantId, id).firstResultOptional();
   }
 
   @GenerateBridge

@@ -16,11 +16,12 @@ public class OpenApiConfig implements OASFilter {
   @Override
   public Operation filterOperation(Operation operation) {
     for (DefaultHeader header : DefaultHeader.values()) {
-      operation.addParameter(new Parameter()
-          .in(In.HEADER)
-          .name(header.name)
-          .schema(new Schema().type(List.of(header.type)))
-          .example(header.example));
+      operation.addParameter(
+          new Parameter()
+              .in(In.HEADER)
+              .name(header.name)
+              .schema(new Schema().type(List.of(header.type)))
+              .example(header.example));
     }
 
     return operation;
@@ -35,4 +36,3 @@ public class OpenApiConfig implements OASFilter {
     private final String example;
   }
 }
-

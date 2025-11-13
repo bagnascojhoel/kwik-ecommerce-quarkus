@@ -1,0 +1,28 @@
+# Build outputs
+build/
+
+# Gradle
+wrapper/
+.gradle/
+gradle/
+.vscode/
+.idea/
+
+# IDE files
+.idea/
+.vscode/
+
+# Database files
+kwik.db
+
+# Environment variables
+.env
+
+# Git repository
+.git/
+
+# Git hooks
+dev-tools/githooks/
+
+# Documents
+/docs/features/

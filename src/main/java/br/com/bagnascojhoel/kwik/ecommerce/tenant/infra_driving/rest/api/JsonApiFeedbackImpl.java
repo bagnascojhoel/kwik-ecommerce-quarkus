@@ -14,5 +14,4 @@ public class JsonApiFeedbackImpl implements JsonApiFeedback {
   private int code;
 
   private Throwable cause;
-
 }

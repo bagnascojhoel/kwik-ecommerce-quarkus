@@ -13,5 +13,4 @@ public class RequestContext {
   public RequestContext(HttpServerRequest request) {
     actor = request.headers().get("x-actor");
   }
-
 }

@@ -26,9 +26,7 @@ public class Product implements Validatable {
 
   private final ProductId id;
 
-  @With
-  @NotNull
-  private final ProductState state;
+  @With @NotNull private final ProductState state;
 
   @NotBlank(message = "product-name-not-blank")
   private final String name;
@@ -51,8 +49,7 @@ public class Product implements Validatable {
       @Nullable String description,
       BigDecimal priceInBrl,
       List<Photo> photos,
-      @Nullable Author author
-  ) {
+      @Nullable Author author) {
     this.id = id;
     this.state = state == null ? HIDDEN : state;
     this.name = name;

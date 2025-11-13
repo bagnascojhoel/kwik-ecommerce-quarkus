@@ -25,38 +25,25 @@ public class ProductManagementRestAdapter implements ProductManagementRestApi {
   }
 
   @Override
-  public JsonApiFeedback createProduct(
-      String tenantId,
-      JsonProduct productResource) {
-    productManagementUseCases.createProduct(
-        TenantId.of(tenantId),
-        productResource.toSaveCommand());
+  public JsonApiFeedback createProduct(String tenantId, JsonProduct productResource) {
+    productManagementUseCases.createProduct(TenantId.of(tenantId), productResource.toSaveCommand());
     return JsonApiFeedback.ofCreated();
   }
 
   @Override
   public JsonApiFeedback updateFullProduct(
-      String tenantId,
-      Long productId,
-      JsonProduct productResource
-  ) {
+      String tenantId, Long productId, JsonProduct productResource) {
     return null;
   }
 
   @Override
   public JsonApiFeedback updatePartialProduct(
-      String tenantId,
-      Long productId,
-      JsonProduct productResource
-  ) {
+      String tenantId, Long productId, JsonProduct productResource) {
     if (!productResource.isPartialUpdate()) {
       throw new UnsupportedOperationException();
     }
     productManagementUseCases.updateProductState(
-        TenantId.of(tenantId),
-        ProductId.of(productId),
-        productResource.getState()
-    );
+        TenantId.of(tenantId), ProductId.of(productId), productResource.getState());
     return JsonApiFeedback.ofUpdated();
   }
 

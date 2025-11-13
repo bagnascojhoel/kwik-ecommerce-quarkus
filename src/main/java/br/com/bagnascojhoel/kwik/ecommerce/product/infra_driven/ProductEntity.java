@@ -1,6 +1,5 @@
 package br.com.bagnascojhoel.kwik.ecommerce.product.infra_driven;
 
-
 import br.com.bagnascojhoel.kwik.ecommerce.common.domain.MappingUtils;
 import br.com.bagnascojhoel.kwik.ecommerce.common.domain.TenantId;
 import br.com.bagnascojhoel.kwik.ecommerce.common.domain.identity.Author;
@@ -48,19 +47,18 @@ public class ProductEntity {
 
   private String name;
 
-  @Nullable
-  private String description;
+  @Nullable private String description;
 
   @Column(name = "price_in_brl")
   private BigDecimal priceInBrl;
 
-  @Embedded
-  private TenantId tenantId;
+  @Embedded private TenantId tenantId;
 
-  @Embedded
-  private Author author;
-  
-  @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL})
+  @Embedded private Author author;
+
+  @OneToMany(
+      mappedBy = "product",
+      cascade = {CascadeType.ALL})
   private List<PhotoEntity> photos;
 
   private ProductEntity() {
@@ -75,19 +73,19 @@ public class ProductEntity {
   }
 
   public static ProductEntity from(final TenantId tenantId, final Product product) {
-    ProductEntity productEntity = ProductEntity.builder()
-        .id(MappingUtils.ifNonNull(product.getId()))
-        .state(product.getState())
-        .name(product.getName())
-        .description(product.getDescription())
-        .priceInBrl(product.getPriceInBrl())
-        .tenantId(tenantId)
-        .author(product.getAuthor())
-        .build();
+    ProductEntity productEntity =
+        ProductEntity.builder()
+            .id(MappingUtils.ifNonNull(product.getId()))
+            .state(product.getState())
+            .name(product.getName())
+            .description(product.getDescription())
+            .priceInBrl(product.getPriceInBrl())
+            .tenantId(tenantId)
+            .author(product.getAuthor())
+            .build();
 
-    productEntity.photos = product.getPhotos().stream()
-        .map(photo -> PhotoEntity.from(productEntity, photo))
-        .toList();
+    productEntity.photos =
+        product.getPhotos().stream().map(photo -> PhotoEntity.from(productEntity, photo)).toList();
 
     return productEntity;
   }
@@ -100,7 +98,6 @@ public class ProductEntity {
         description,
         priceInBrl,
         Objects.nonNull(photos) ? photos.stream().map(PhotoEntity::to).toList() : new ArrayList<>(),
-        author
-    );
+        author);
   }
 }

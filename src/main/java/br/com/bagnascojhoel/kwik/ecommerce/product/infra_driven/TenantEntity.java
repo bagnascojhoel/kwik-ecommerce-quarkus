@@ -28,8 +28,7 @@ public class TenantEntity extends PanacheEntityBase {
 
   private final String name;
 
-  @Embedded
-  private final Author author;
+  @Embedded private final Author author;
 
   private TenantEntity() {
     this.entityId = null;
@@ -45,5 +44,4 @@ public class TenantEntity extends PanacheEntityBase {
   public static Optional<TenantEntity> findOptionalByBusinessId(final String businessId) {
     return find("businessId", businessId).firstResultOptional();
   }
-
 }

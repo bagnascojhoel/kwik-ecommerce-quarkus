@@ -22,5 +22,4 @@ public class TenantId implements Serializable {
   public static TenantId with(String id) {
     return new TenantId(id);
   }
-
 }

@@ -31,5 +31,4 @@ public interface TenantRestApi {
   @Path("/{id}")
   @GET
   RestResponse<JsonTenant> get(@PathParam("id") String aTenantId);
-
 }

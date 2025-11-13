@@ -7,7 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ResponseStatus {
-
   OK(Status.OK, "OK"),
   CREATED(Status.CREATED, "Created"),
   NO_CONTENT(Status.NO_CONTENT, "No Content"),
@@ -21,5 +20,4 @@ public enum ResponseStatus {
 
   private final Status status;
   private final String reason;
-
 }

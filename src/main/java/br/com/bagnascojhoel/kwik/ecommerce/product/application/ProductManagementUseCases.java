@@ -25,26 +25,24 @@ public class ProductManagementUseCases {
 
   @Transactional
   public Product createProduct(
-      @Nonnull final TenantId tenantId,
-      @Nonnull @Valid final SaveProductCommand command
-  ) {
+      @Nonnull final TenantId tenantId, @Nonnull @Valid final SaveProductCommand command) {
     tenantContextHolder.loadTenant(tenantId);
     final Product product = Product.create(command);
     this.productRepository.insert(product);
     return product;
   }
 
-
   @Transactional
   public Product updateProduct(
       @Nonnull final TenantId tenantId,
       @Nonnull final ProductId productId,
-      @Nonnull @Valid final SaveProductCommand command
-  ) {
+      @Nonnull @Valid final SaveProductCommand command) {
     tenantContextHolder.loadTenant(tenantId);
-    final Product product = productRepository.get(productId)
-        .map(p -> p.update(command))
-        .orElseThrow(ProductNotFoundException::new);
+    final Product product =
+        productRepository
+            .get(productId)
+            .map(p -> p.update(command))
+            .orElseThrow(ProductNotFoundException::new);
     product.validate();
     this.productRepository.update(product);
     return product;
@@ -54,22 +52,17 @@ public class ProductManagementUseCases {
   public void updateProductState(
       @Nonnull final TenantId tenantId,
       @Nonnull final ProductId productId,
-      @Nonnull final ProductState productState
-  ) {
+      @Nonnull final ProductState productState) {
     tenantContextHolder.loadTenant(tenantId);
-    Product product = productRepository.get(productId)
-        .orElseThrow(ProductNotFoundException::new);
+    Product product = productRepository.get(productId).orElseThrow(ProductNotFoundException::new);
     this.productRepository.update(product.withState(productState));
   }
 
   @Transactional
   public Product getProductById(
-      @Nonnull final TenantId tenantId,
-      @Nonnull final ProductId productId
-  ) {
+      @Nonnull final TenantId tenantId, @Nonnull final ProductId productId) {
     tenantContextHolder.loadTenant(tenantId);
-    return this.productRepository.get(productId)
-        .orElseThrow(ProductNotFoundException::new);
+    return this.productRepository.get(productId).orElseThrow(ProductNotFoundException::new);
   }
 
   @Transactional

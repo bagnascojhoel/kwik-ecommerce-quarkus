@@ -14,8 +14,7 @@ import lombok.NonNull;
 @Unremovable
 public class IdentityFactory {
 
-  @Inject
-  private RequestContext requestContext;
+  @Inject private RequestContext requestContext;
 
   public static IdentityFactory getInstance() {
     try {
@@ -40,5 +39,4 @@ public class IdentityFactory {
         .modifiedAt(LocalDateTime.now())
         .build();
   }
-
 }

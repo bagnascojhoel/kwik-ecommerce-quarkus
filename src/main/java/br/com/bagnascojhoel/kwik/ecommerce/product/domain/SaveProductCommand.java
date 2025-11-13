@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-
 @Builder
 @AllArgsConstructor
 @Getter
@@ -21,5 +20,4 @@ public class SaveProductCommand {
   private final List<String> photosUrl;
 
   private final ProductState productState;
-
 }

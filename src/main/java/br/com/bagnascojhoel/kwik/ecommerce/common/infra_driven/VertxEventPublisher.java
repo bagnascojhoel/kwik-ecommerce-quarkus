@@ -9,8 +9,7 @@ import jakarta.inject.Singleton;
 @Singleton
 public class VertxEventPublisher implements EventPublisher {
 
-  @Inject
-  EventBus eventBus;
+  @Inject EventBus eventBus;
 
   @Override
   public void publish(Event event) {

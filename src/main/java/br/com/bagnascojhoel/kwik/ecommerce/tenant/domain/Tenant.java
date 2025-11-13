@@ -18,13 +18,11 @@ public class Tenant extends PanacheEntityBase {
 
   private static final String DEFAULT_CREATOR = "admin";
 
-  @EmbeddedId
-  private final TenantId id;
+  @EmbeddedId private final TenantId id;
 
   private final String name;
 
-  @Embedded
-  private final Author author;
+  @Embedded private final Author author;
 
   private Tenant() {
     this.id = null;
@@ -39,5 +37,4 @@ public class Tenant extends PanacheEntityBase {
   public static Tenant findById(final TenantId id) {
     return find("id", id).firstResult();
   }
-
 }

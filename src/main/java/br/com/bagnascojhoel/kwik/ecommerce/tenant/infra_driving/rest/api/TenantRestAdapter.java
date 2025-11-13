@@ -15,16 +15,13 @@ public class TenantRestAdapter implements TenantRestApi {
 
   @Override
   public JsonApiFeedback post(JsonTenant jsonTenant) {
-    tenantApplicationService.create(TenantId.with(jsonTenant.getId()),
-        jsonTenant.getName());
+    tenantApplicationService.create(TenantId.with(jsonTenant.getId()), jsonTenant.getName());
     return JsonApiFeedback.ofCreated();
   }
 
   @Override
   public List<JsonTenant> get() {
-    return tenantApplicationService.getAll().stream()
-        .map(JsonTenant::create)
-        .toList();
+    return tenantApplicationService.getAll().stream().map(JsonTenant::create).toList();
   }
 
   @Override
@@ -32,5 +29,4 @@ public class TenantRestAdapter implements TenantRestApi {
     Tenant tenant = tenantApplicationService.get(TenantId.with(aTenantId));
     return RestResponse.ok(JsonTenant.create(tenant));
   }
-
 }

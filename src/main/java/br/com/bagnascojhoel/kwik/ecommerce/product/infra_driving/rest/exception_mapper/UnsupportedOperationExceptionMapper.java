@@ -9,15 +9,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @Provider
 @Slf4j
-public class UnsupportedOperationExceptionMapper implements
-    ExceptionMapper<UnsupportedOperationException> {
+public class UnsupportedOperationExceptionMapper
+    implements ExceptionMapper<UnsupportedOperationException> {
 
   @Override
   public Response toResponse(UnsupportedOperationException exception) {
     log.atError().log("unsupported operation", exception);
     return Response.status(ResponseStatus.UNPROCESSABLE_ENTITY.getStatus())
-        .entity(JsonApiFeedbackImpl.create(exception.getMessage(),
-            ResponseStatus.UNPROCESSABLE_ENTITY.getStatus()))
+        .entity(
+            JsonApiFeedbackImpl.create(
+                exception.getMessage(), ResponseStatus.UNPROCESSABLE_ENTITY.getStatus()))
         .build();
   }
 }

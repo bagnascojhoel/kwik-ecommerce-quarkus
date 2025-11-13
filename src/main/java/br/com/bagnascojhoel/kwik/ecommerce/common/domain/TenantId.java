@@ -15,8 +15,7 @@ public class TenantId {
   @Column(name = "tenant_id")
   private final Long id;
 
-  @Transient
-  private final String businessId;
+  @Transient private final String businessId;
 
   private TenantId() {
     this.id = null;
@@ -30,5 +29,4 @@ public class TenantId {
   public static TenantId of(final Long id, final String businessId) {
     return new TenantId(id, businessId);
   }
-
 }

@@ -32,5 +32,4 @@ public class JsonMetadataImpl implements JsonMetadata {
         .modifiedAt(product.getAuthor().getModifiedAt())
         .build();
   }
-
 }

@@ -15,5 +15,4 @@ public interface ProductRepository {
   List<Product> onState(@Nonnull final ProductState productState);
 
   List<Product> getAll();
-
 }

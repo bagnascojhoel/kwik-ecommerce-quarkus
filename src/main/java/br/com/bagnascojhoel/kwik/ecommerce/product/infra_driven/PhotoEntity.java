@@ -27,17 +27,14 @@ public class PhotoEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private final Long id;
 
-  @NotBlank
-  private final String url;
+  @NotBlank private final String url;
 
   @Nonnull
   @ManyToOne
   @JoinColumn(name = "product_id")
   private final ProductEntity product;
 
-  @Nonnull
-  @Embedded
-  private final Author author;
+  @Nonnull @Embedded private final Author author;
 
   private PhotoEntity() {
     this.id = null;
@@ -56,11 +53,6 @@ public class PhotoEntity {
   }
 
   public Photo to() {
-    return new Photo(
-        id,
-        url,
-        ProductId.of(product.getId()),
-        author
-    );
+    return new Photo(id, url, ProductId.of(product.getId()), author);
   }
 }

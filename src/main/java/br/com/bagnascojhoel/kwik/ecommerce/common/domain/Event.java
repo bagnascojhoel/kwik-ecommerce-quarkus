@@ -6,10 +6,7 @@ public class Event {
 
   private final Object payload;
 
-  public Event(
-    String destination,
-    Object payload
-  ) {
+  public Event(String destination, Object payload) {
     this.destination = destination;
     this.payload = payload;
   }

@@ -1,6 +1,8 @@
 package br.com.bagnascojhoel.kwik.ecommerce.common.infra_driving.rest.api;
 
 import jakarta.ws.rs.core.Response.Status;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 public interface JsonApiFeedback {
@@ -19,7 +21,9 @@ public interface JsonApiFeedback {
 
   Throwable getCause();
 
+  @Builder
   @Getter
+  @AllArgsConstructor
   class DefaultJsonApiFeedback implements JsonApiFeedback {
 
     private final String message;
@@ -34,5 +38,4 @@ public interface JsonApiFeedback {
       this.cause = null;
     }
   }
-
 }

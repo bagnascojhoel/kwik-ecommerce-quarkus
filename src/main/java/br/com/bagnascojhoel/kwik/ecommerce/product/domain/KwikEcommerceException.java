@@ -7,8 +7,7 @@ import lombok.Getter;
 @Getter
 public class KwikEcommerceException extends RuntimeException {
 
-  @Nullable
-  private final String errorCode;
+  @Nullable private final String errorCode;
 
   public KwikEcommerceException(@Nonnull String message, String errorCode) {
     super(message);

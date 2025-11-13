@@ -14,9 +14,8 @@ import lombok.AllArgsConstructor;
 
 @ApplicationScoped
 @AllArgsConstructor
-public class PanacheProductRepository implements
-    ProductRepository,
-    PanacheTenantRepositoryBase<ProductEntity, Long> {
+public class PanacheProductRepository
+    implements ProductRepository, PanacheTenantRepositoryBase<ProductEntity, Long> {
 
   private final TenantContextHolder tenantContextHolder;
 
@@ -40,9 +39,7 @@ public class PanacheProductRepository implements
 
   @Override
   public List<Product> onState(@Nonnull ProductState productState) {
-    return this.find("state = {}", productState).list().stream()
-        .map(ProductEntity::to)
-        .toList();
+    return this.find("state = {}", productState).list().stream().map(ProductEntity::to).toList();
   }
 
   @Override

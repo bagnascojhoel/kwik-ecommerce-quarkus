@@ -21,7 +21,7 @@ public class JsonTenant {
   private JsonMetadata metadata;
 
   public static JsonTenant create(@NonNull Tenant tenant) {
-    return new JsonTenant(tenant.getId().getValue(), tenant.getName(),
-        JsonMetadataImpl.create(tenant));
+    return new JsonTenant(
+        tenant.getId().getValue(), tenant.getName(), JsonMetadataImpl.create(tenant));
   }
 }

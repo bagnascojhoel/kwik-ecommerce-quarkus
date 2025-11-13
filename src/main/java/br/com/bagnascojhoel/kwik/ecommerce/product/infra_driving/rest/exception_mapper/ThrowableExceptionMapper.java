@@ -15,10 +15,9 @@ public class ThrowableExceptionMapper implements ExceptionMapper<Throwable> {
   public Response toResponse(Throwable exception) {
     log.atError().log("unexpected error", exception);
     return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-        .entity(JsonApiFeedbackImpl.create(
-            "unexpected error",
-            ResponseStatus.INTERNAL_SERVER_ERROR.getStatus(),
-            exception))
+        .entity(
+            JsonApiFeedbackImpl.create(
+                "unexpected error", ResponseStatus.INTERNAL_SERVER_ERROR.getStatus(), exception))
         .build();
   }
 }

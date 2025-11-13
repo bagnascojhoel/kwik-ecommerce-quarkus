@@ -22,9 +22,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/api/tenants/{tenantId}/management/products")
-@Tags({
-    @Tag(name = "Management")
-})
+@Tags({@Tag(name = "Management")})
 public interface ProductManagementRestApi {
 
   @GET
@@ -34,13 +32,11 @@ public interface ProductManagementRestApi {
   @GET
   @Path("/{prouductId}")
   JsonProduct getProduct(
-      @PathParam("tenantId") String tenantId,
-      @PathParam("productId") String productId);
+      @PathParam("tenantId") String tenantId, @PathParam("productId") String productId);
 
   @POST
   JsonApiFeedback createProduct(
-      @PathParam("tenantId") String tenantId,
-      JsonProduct productResource);
+      @PathParam("tenantId") String tenantId, JsonProduct productResource);
 
   @PUT
   @Path("/{productId}")
@@ -56,15 +52,16 @@ public interface ProductManagementRestApi {
       @PathParam("tenantId") String tenantId,
       @PathParam("productId") Long productId,
       @RequestBody(
-          content = @Content(
-              schema = @Schema(
-                  implementation = JsonProduct.class,
-                  properties = @SchemaProperty(name = "state")))) JsonProduct productState);
+              content =
+                  @Content(
+                      schema =
+                          @Schema(
+                              implementation = JsonProduct.class,
+                              properties = @SchemaProperty(name = "state"))))
+          JsonProduct productState);
 
   @DELETE
   @Path("/{productId}")
   JsonApiFeedback deleteProduct(
-      @PathParam("tenantId") String tenantId,
-      @PathParam("productId") String productId);
-
+      @PathParam("tenantId") String tenantId, @PathParam("productId") String productId);
 }

@@ -12,8 +12,9 @@ public class TenantContextHolderImpl implements TenantContextHolder {
 
   @Override
   public void loadTenant(TenantId tenantId) {
-    this.tenant = TenantEntity.findOptionalByBusinessId(tenantId.getBusinessId())
-        .orElseThrow(() -> new TenantNotFoundException(tenantId));
+    this.tenant =
+        TenantEntity.findOptionalByBusinessId(tenantId.getBusinessId())
+            .orElseThrow(() -> new TenantNotFoundException(tenantId));
   }
 
   @Override

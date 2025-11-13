@@ -28,9 +28,6 @@ public class Photo {
   }
 
   public static Photo create(String url) {
-    return Photo.builder()
-        .url(url)
-        .author(IdentityFactory.getInstance().creator())
-        .build();
+    return Photo.builder().url(url).author(IdentityFactory.getInstance().creator()).build();
   }
 }
