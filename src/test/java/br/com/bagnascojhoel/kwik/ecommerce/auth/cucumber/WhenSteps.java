@@ -1,10 +1,10 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.cucumber;
 
 import io.cucumber.java.en.When;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@ApplicationScoped
+@Dependent
 public class WhenSteps {
 
   @Inject private AuthContext authContext;

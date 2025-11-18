@@ -1,11 +1,9 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.application;
 
-import java.util.Optional;
-
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.AuthenticationException;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.GenerateJwtCommand;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.Jwt;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.JwtService;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.GenerateJwtCommand;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.Jwt;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.JwtService;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.PasswordEncryptionService;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.RawSecret;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.User;
@@ -14,6 +12,7 @@ import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.UserNotFoundExceptio
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.UserRepository;
 import jakarta.annotation.Nonnull;
 import jakarta.enterprise.context.ApplicationScoped;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,8 +39,9 @@ public class JwtFlowApplicationService {
       throw new UserNotFoundException();
     }
 
-    boolean hasCorrectPassword = passwordEncryptionService.equals(user.get().getSecurePassword(),
-     new RawSecret(generateJwtCommand.getPassword()));
+    boolean hasCorrectPassword =
+        passwordEncryptionService.equals(
+            user.get().getSecurePassword(), new RawSecret(generateJwtCommand.getPassword()));
     if (!hasCorrectPassword) {
       log.atDebug().log(
           "password did not match, userId={}, password={}",

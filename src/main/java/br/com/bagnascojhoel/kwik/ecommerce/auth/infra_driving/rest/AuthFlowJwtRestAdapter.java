@@ -1,7 +1,7 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driving.rest;
 
 import br.com.bagnascojhoel.kwik.ecommerce.auth.application.JwtFlowApplicationService;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.Jwt;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.CookieParam;
 import jakarta.ws.rs.core.NewCookie;
@@ -17,18 +17,26 @@ public class AuthFlowJwtRestAdapter implements AuthFlowJwtRestApi {
   @Override
   public Response login(JsonJwtLogin jsonJwtLogin) {
     Jwt jwt = jwtFlowApplicationService.login(jsonJwtLogin.toGenerateJwtCommand());
-    JsonJwt jsonJwt = JsonJwt.of(jwt.getToken());
+    JsonJwt jsonJwt = JsonJwt.of(jwt.getSignedToken().token());
     NewCookie cookie =
-        new NewCookie.Builder("jwt").value(jwt.getToken()).path("/").httpOnly(true).build();
+        new NewCookie.Builder("jwt")
+            .value(jwt.getSignedToken().token())
+            .path("/")
+            .httpOnly(true)
+            .build();
     return Response.ok(jsonJwt).cookie(cookie).build();
   }
 
   @Override
   public Response refresh(@CookieParam("jwt") String token) {
     Jwt jwt = jwtFlowApplicationService.refresh(Jwt.of(token));
-    JsonJwt jsonJwt = JsonJwt.of(jwt.getToken());
+    JsonJwt jsonJwt = JsonJwt.of(jwt.getSignedToken().token());
     NewCookie cookie =
-        new NewCookie.Builder("jwt").value(jwt.getToken()).path("/").httpOnly(true).build();
+        new NewCookie.Builder("jwt")
+            .value(jwt.getSignedToken().token())
+            .path("/")
+            .httpOnly(true)
+            .build();
     return Response.ok(jsonJwt).cookie(cookie).build();
   }
 

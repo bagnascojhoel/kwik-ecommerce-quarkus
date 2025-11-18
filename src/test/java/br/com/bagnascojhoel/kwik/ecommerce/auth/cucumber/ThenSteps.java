@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.AuthenticationException;
 import io.cucumber.java.en.Then;
-import jakarta.enterprise.context.ApplicationScoped;
+import io.quarkiverse.cucumber.ScenarioScope;
 import jakarta.inject.Inject;
 
-@ApplicationScoped
+@ScenarioScope
 public class ThenSteps {
 
   @Inject private AuthContext authContext;

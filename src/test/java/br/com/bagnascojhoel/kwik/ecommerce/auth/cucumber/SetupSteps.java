@@ -7,7 +7,8 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class SetupSteps {
 
-  @Inject private AuthContext authContext;
+  @Inject
+  private AuthContext authContext;
 
   @Before
   public void reset() {

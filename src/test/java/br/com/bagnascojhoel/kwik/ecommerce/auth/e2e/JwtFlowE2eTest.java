@@ -4,32 +4,16 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.UserRepository;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driven.library.PasswordEncryptionServiceAdapter;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.object_mother.UserMother;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.response.Response;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-@QuarkusTest
+@QuarkusIntegrationTest
 public class JwtFlowE2eTest {
-
-  @Inject
-  UserRepository userRepository;
-
-  @BeforeEach
-  @Transactional
-  public void setup() {
-    // Ensure a known user exists for the tests
-    userRepository.persist(UserMother.kwikAdmin(new PasswordEncryptionServiceAdapter()));
-  }
 
   @Test
   public void successfulLoginViaRestApi() {
-    final String body = "{\"user\":\"kwik-admin\",\"password\":\"password\"}";
+    final String body = "{\"user\":\"kwik-admin\",\"password\":\"integrationTests\"}";
 
     given()
         .contentType("application/json")
@@ -43,7 +27,7 @@ public class JwtFlowE2eTest {
 
   @Test
   public void refreshTokenViaRestApi() {
-    final String body = "{\"user\":\"kwik-admin\",\"password\":\"password\"}";
+    final String body = "{\"user\":\"kwik-admin\",\"password\":\"integrationTests\"}";
 
     Response loginResponse =
         given().contentType("application/json").body(body).post("/api/auth/flows/jwt/login");
@@ -62,7 +46,7 @@ public class JwtFlowE2eTest {
 
   @Test
   public void checkStateViaRestApi() {
-    final String body = "{\"user\":\"kwik-admin\",\"password\":\"password\"}";
+    final String body = "{\"user\":\"kwik-admin\",\"password\":\"integrationTests\"}";
 
     Response loginResponse =
         given().contentType("application/json").body(body).post("/api/auth/flows/jwt/login");

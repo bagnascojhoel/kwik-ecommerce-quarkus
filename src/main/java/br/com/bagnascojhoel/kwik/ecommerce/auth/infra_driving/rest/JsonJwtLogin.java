@@ -1,6 +1,6 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driving.rest;
 
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.GenerateJwtCommand;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.GenerateJwtCommand;
 import lombok.Data;
 
 @Data

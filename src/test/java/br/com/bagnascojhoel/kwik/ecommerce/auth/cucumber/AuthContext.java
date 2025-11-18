@@ -1,33 +1,38 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.cucumber;
 
 import br.com.bagnascojhoel.kwik.ecommerce.auth.application.JwtFlowApplicationService;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.cucumber.mocks.JwtServiceMock;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.cucumber.mocks.UserRepositoryMock;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.AuthenticationException;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.GenerateJwtCommand;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.Jwt;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.GenerateJwtCommand;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.Jwt;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.JwtService;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.PasswordEncryptionService;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.RawSecret;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.User;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.UserRepository;
-import br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driven.library.PasswordEncryptionServiceAdapter;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.object_mother.JwtMother;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.object_mother.UserMother;
-import io.quarkiverse.cucumber.ScenarioScope;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.util.Optional;
 import lombok.Getter;
 import org.mockito.Mockito;
 
-@ScenarioScope
+@ApplicationScoped
 public class AuthContext {
 
-  private final PasswordEncryptionService passwordEncryptionService =
-      new PasswordEncryptionServiceAdapter();
+  @Inject
+  private PasswordEncryptionService passwordEncryptionService;
 
   @Inject
   private JwtFlowApplicationService jwtFlowApplicationService;
 
   @Inject
   private UserRepository userRepository;
+
+  @Inject
+  private JwtService jwtService;
 
   private Setup setup = new Setup();
 
@@ -41,10 +46,12 @@ public class AuthContext {
 
   public void setupValidJwt() {
     this.setup.currentJwt = JwtMother.validJwt();
+    Mockito.when(getJwtServiceMock().isValid(this.setup.currentJwt)).thenReturn(true);
   }
 
   public void setupExpiredJwt() {
     this.setup.currentJwt = JwtMother.expiredJwt();
+    Mockito.when(getJwtServiceMock().isValid(this.setup.currentJwt)).thenReturn(false);
   }
 
   public void setupKwikAdmin() {
@@ -62,10 +69,15 @@ public class AuthContext {
     user.changePassword(passwordEncryptionService, password);
     this.setup.user = user;
     this.setup.rawPassword = password;
-    Mockito.when(userRepository.getByUsername(this.setup.user.getUsername()))
+    Mockito.when(getUserRepositoryMock().getByUsername(this.setup.user.getUsername()))
         .thenReturn(Optional.ofNullable(this.setup.getUser()));
-    Mockito.when(userRepository.getByEmail(this.setup.user.getEmail()))
+    Mockito.when(getUserRepositoryMock().getByEmail(this.setup.user.getEmail()))
         .thenReturn(Optional.ofNullable(this.setup.getUser()));
+
+    // Mock JwtService to generate a valid JWT
+    Jwt generatedJwt = JwtMother.validJwt();
+    Mockito.when(getJwtServiceMock().generate()).thenReturn(generatedJwt);
+    Mockito.when(getJwtServiceMock().isValid(generatedJwt)).thenReturn(true);
   }
 
   public void login() {
@@ -111,6 +123,14 @@ public class AuthContext {
 
   public void loginWrongPassword() {
     this.login(this.setup.user.getUsername(), RawSecret.of("wrong-password"));
+  }
+
+  private JwtServiceMock getJwtServiceMock() {
+    return (JwtServiceMock) this.jwtService;
+  }
+
+  private UserRepositoryMock getUserRepositoryMock() {
+    return (UserRepositoryMock) this.userRepository;
   }
 
   @Getter

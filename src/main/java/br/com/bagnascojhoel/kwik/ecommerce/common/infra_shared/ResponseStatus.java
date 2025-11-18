@@ -1,4 +1,4 @@
-package br.com.bagnascojhoel.kwik.ecommerce.infra_shared;
+package br.com.bagnascojhoel.kwik.ecommerce.common.infra_shared;
 
 import jakarta.ws.rs.core.Response.Status;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.object_mother;
 
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.Jwt;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.Jwt;
 
 public class JwtMother {
 

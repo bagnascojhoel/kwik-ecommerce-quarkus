@@ -1,4 +1,4 @@
-package br.com.bagnascojhoel.kwik.ecommerce.auth.domain;
+package br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

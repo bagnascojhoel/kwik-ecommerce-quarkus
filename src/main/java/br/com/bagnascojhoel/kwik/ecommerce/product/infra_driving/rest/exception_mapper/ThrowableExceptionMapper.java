@@ -1,6 +1,6 @@
 package br.com.bagnascojhoel.kwik.ecommerce.product.infra_driving.rest.exception_mapper;
 
-import br.com.bagnascojhoel.kwik.ecommerce.infra_shared.ResponseStatus;
+import br.com.bagnascojhoel.kwik.ecommerce.common.infra_shared.ResponseStatus;
 import br.com.bagnascojhoel.kwik.ecommerce.product.infra_driving.rest.api.JsonApiFeedbackImpl;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;

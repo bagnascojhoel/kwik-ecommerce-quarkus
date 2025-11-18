@@ -2,29 +2,32 @@ package br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driven;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.Jwt;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.KwikAuthConfig;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.Jwt;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.jwt.SignedJwt;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driven.library.JwtServiceAdapter;
+import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.jwt.build.JwtClaimsBuilder;
 import jakarta.inject.Inject;
+import java.time.Clock;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
 class JwtServiceAdapterTest {
 
-  @Inject
-  JwtServiceAdapter jwtServiceAdapter;
+  @Inject JwtServiceAdapter jwtServiceAdapter;
 
-  @Inject
-  KwikAuthConfig kwikAuthConfig;
+  @Inject KwikAuthConfig kwikAuthConfig;
+
+  @InjectMock Clock clock;
 
   @Test
   void generate_shouldReturnValidJwt() {
     Jwt jwt = jwtServiceAdapter.generate();
 
     assertThat(jwt).isNotNull();
-    assertThat(jwt.getToken()).isNotNull().isNotEmpty();
+    assertThat(jwt.getSignedToken().token()).isNotNull().isNotEmpty();
     assertThat(jwtServiceAdapter.isValid(jwt)).isTrue();
   }
 
@@ -45,5 +48,16 @@ class JwtServiceAdapterTest {
     Jwt expiredJwt = Jwt.of(token);
 
     assertThat(jwtServiceAdapter.isValid(expiredJwt)).isFalse();
+  }
+
+  @Test
+  void unwrap_shouldReturnJwtWithClaims() {
+    Jwt generated = jwtServiceAdapter.generate();
+    SignedJwt signedJwt = generated.getSignedToken();
+    Jwt unwrapped = jwtServiceAdapter.unwrap(signedJwt);
+
+    assertThat(unwrapped.getSignedToken()).isEqualTo(generated.getSignedToken());
+    assertThat(unwrapped.getIssuer()).isEqualTo(kwikAuthConfig.jwtIssuer());
+    assertThat(unwrapped.getAudience()).isEqualTo(kwikAuthConfig.jwtAudience());
   }
 }

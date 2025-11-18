@@ -1,9 +1,8 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.cucumber;
 
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.UserRepository;
 import io.quarkiverse.cucumber.CucumberOptions;
 import io.quarkiverse.cucumber.CucumberQuarkusTest;
-import io.quarkus.test.InjectMock;
+import io.quarkus.test.junit.TestProfile;
 
 @CucumberOptions(
     features = "src/test/resources/features/auth/",
@@ -11,11 +10,10 @@ import io.quarkus.test.InjectMock;
       "br.com.bagnascojhoel.kwik.ecommerce.common.cucumber",
       "br.com.bagnascojhoel.kwik.ecommerce.auth.cucumber"
     })
-public class AuthIntegrationTest extends CucumberQuarkusTest {
-
-  @InjectMock private UserRepository userRepository;
+@TestProfile(CucumberTestProfile.class)
+public class CucumberAuthTest extends CucumberQuarkusTest {
 
   public static void main(String[] args) {
-    runMain(AuthIntegrationTest.class, args);
+    runMain(CucumberAuthTest.class, args);
   }
 }
