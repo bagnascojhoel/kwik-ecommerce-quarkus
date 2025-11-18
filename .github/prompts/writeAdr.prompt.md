@@ -1,8 +1,10 @@
 ---
+
 description: 'Guide users through creating a comprehensive ADR via systematic discovery'
 agent: Architect
 tools: ['edit', 'search', 'new', 'runCommands', 'runTasks', 'makenotion/notion-mcp-server/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'fetch', 'githubRepo']
----
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 > This prompt is written with the automated agent as first-person narrator.
 
 # Architectural Decision Record (ADR) Builder
@@ -35,6 +37,7 @@ Once you provide the Story ID, I will:
 5. **Present Findings**: Show you what I discovered and ask for verification
 
 **My Output to You:**
+
 ```
 📋 FEATURE ANALYSIS
 Story: [ID] - [Title]
@@ -53,6 +56,7 @@ Related Features Found:
 ```
 
 ### 2. **Business Context & Problem Statement**
+
 ind
 **My Proactive Analysis:**
 I will automatically:
@@ -63,6 +67,7 @@ I will automatically:
 5. **Analyze System Impact**: Review existing architecture and performance characteristics
 
 **My Output to You:**
+
 ```
 🎯 BUSINESS ANALYSIS
 Problem: [Extracted problem statement]
@@ -95,6 +100,7 @@ I will automatically:
 5. **Review Infrastructure**: Check existing caching, queuing, and database patterns
 
 **My Output to You:**
+
 ```
 🔧 TECHNICAL SCOPE ANALYSIS
 Affected Layers: [Based on similar features]
@@ -133,6 +139,7 @@ I will automatically:
 6. **Check Retention Policies**: Search docs for data retention requirements
 
 **My Output to You:**
+
 ```
 💾 DATA & PERSISTENCE ANALYSIS
 
@@ -171,6 +178,7 @@ I will automatically:
 5. **Map to Existing Models**: Find similar domain patterns in codebase
 
 **My Output to You:**
+
 ```
 🏗️ DOMAIN MODEL ANALYSIS
 
@@ -216,6 +224,7 @@ I will automatically:
 6. **Scan External Integrations**: Search for RestClient, WebClient, or API clients
 
 **My Output to You:**
+
 ```
 🌐 API & INTEGRATION ANALYSIS
 
@@ -261,6 +270,7 @@ I will automatically:
 5. **Prepare Comparison**: Create side-by-side analysis of alternatives
 
 **My Output to You - DESIGN PROPOSALS:**
+
 ```
 🎨 ARCHITECTURE DESIGN OPTIONS
 
@@ -336,6 +346,7 @@ I will engage in a back-and-forth conversation with you to:
 I will automatically:
 1. **Identify Technical Risks**: Analyze complexity, dependencies, and failure points
 2. **Document Trade-offs**: Compare alternatives from Section 7 discussion
+
 ### 9. **Validation & Success Criteria**
 
 **My Proactive Analysis:**
@@ -347,6 +358,7 @@ I will automatically:
 5. **Create Validation Checklist**: Ensure nothing is missed
 
 **My Output to You:**
+
 ```
 ✅ VALIDATION & SUCCESS CRITERIA
 
@@ -379,6 +391,7 @@ Critical Documentation Identified:
 - Are the right stakeholders identified?
 - Missing any critical documentation?
 ```
+
 ```
 ## My Proactive Workflow
 
@@ -422,6 +435,7 @@ Complexity Assessment:
 ```
 
 ### 9. **Validation & Success Criteria**
+
 - How will we know this ADR is complete and correct?
 - What would make this decision successful in 6 months?
 - Are there specific review requirements or stakeholders?
@@ -506,6 +520,7 @@ Before finalizing the ADR, I will validate:
 
 Throughout this process, I will:
 - Write in clear markdown with proper formatting
+
 ## Next Steps
 
 **To Get Started:**

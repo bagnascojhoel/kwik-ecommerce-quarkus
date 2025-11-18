@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity
-@Table(name = "tenant")
+@Table(name = "tenant", schema = "tenant")
 @AllArgsConstructor
 @Getter
 public class TenantEntity extends PanacheEntityBase {

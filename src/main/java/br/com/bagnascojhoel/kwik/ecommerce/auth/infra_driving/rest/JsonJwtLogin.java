@@ -1,7 +1,6 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driving.rest;
 
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.GenerateJwtCommand;
-import java.nio.charset.StandardCharsets;
 import lombok.Data;
 
 @Data

@@ -20,7 +20,7 @@ import lombok.Builder;
 @Entity
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "product_photo")
+@Table(name = "product_photo", schema = "product")
 public class PhotoEntity {
 
   @Id

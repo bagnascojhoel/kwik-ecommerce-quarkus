@@ -12,10 +12,11 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
   @Override
   public Response toResponse(NotFoundException e) {
     return Response.status(Status.NOT_FOUND)
-        .entity(JsonApiFeedback.DefaultJsonApiFeedback.builder()
-            .code(404)
-            .message(e.getMessage())
-            .build())
+        .entity(
+            JsonApiFeedback.DefaultJsonApiFeedback.builder()
+                .code(404)
+                .message(e.getMessage())
+                .build())
         .build();
   }
 }

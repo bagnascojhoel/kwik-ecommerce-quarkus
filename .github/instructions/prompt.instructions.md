@@ -1,7 +1,8 @@
 ---
+
 applyTo: '*'
 description: "Define rules for correct understanding of prompts."
----
+-----------------------------------------------------------------
 
 You MUST use the instructions on this document to correctly understand prompts.
 
@@ -13,7 +14,7 @@ You WILL ALWAYS follow these definitions on every prompt.
 
 <prompt_markers>
 - ASK: Indicates a point where you must ask the user for clarification
-- INFORM: Indicates a point where you must inform the user of something 
+- INFORM: Indicates a point where you must inform the user of something
 - WILL: Indicates a required action
 - MUST: Indicates a critical requirement
 - ALWAYS: Indicates a consistent behavior

@@ -1,7 +1,8 @@
 ---
+
 description: 'Create an implementation plan for an ADR with files to be changed and references to supporting documentation or existing files'
 agent: Architect
----
+----------------
 
 # Write Implementation Plan for ADR
 
@@ -47,8 +48,7 @@ There are some meta instructions on the template that you must NOT write in the 
 - Optional: if a section should be or not included in the final plan
 - Content: guidelines you need to follow when filling the section
 
-
-``` 
+```
 # Implementation Plan for ADR <ADR-ID>
 
 ### 1 BDD Changes
@@ -178,6 +178,7 @@ Describe the rationale for any new libraries or upgrades, including why existing
 - **RISK-001**: Risk 1
 - **ASSUMPTION-001**: Assumption 1
 ```
+
 </plan_style_guide>
 
 ## Validation
@@ -189,3 +190,4 @@ DO NOT OUTPUT ANY OF THESE VALIDATIONS IN THE FINAL IMPLEMENTATION PLAN.
 - Confirm that all referenced files and documentation exist and are accessible.
 - Check for consistency in terminology and style throughout the document.
 - Validate that the plan aligns with the goals and constraints outlined in the ADR.
+

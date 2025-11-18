@@ -1,8 +1,9 @@
 ---
-applyTo: 'src/main/resources/migrations/**/*.sql, src/main/resources/migrations/**/changelog.xml'
----
 
-Liquibase migration standards for SQLite database schema management.
+applyTo: 'src/main/resources/migrations/**/*.sql, src/main/resources/migrations/**/changelog.xml'
+-------------------------------------------------------------------------------------------------
+
+Liquibase migration standards for PostgreSQL database schema management.
 
 ## Migration Structure
 
@@ -20,6 +21,7 @@ Liquibase migration standards for SQLite database schema management.
 ## Changeset Format
 
 **Required header:**
+
 ```sql
 --liquibase formatted sql
 
@@ -35,45 +37,49 @@ Liquibase migration standards for SQLite database schema management.
 
 - **Keywords:** UPPERCASE (CREATE, TABLE, VARCHAR, NOT NULL, etc.)
 - **Identifiers:** lowercase with underscores (table_name, column_name)
-- **Tables with reserved words:** Single quotes (`'user'`)
-- **Primary keys:** `id INTEGER PRIMARY KEY AUTOINCREMENT`
+- **Tables with reserved words:** Double quotes (`"user"`)
+- **Primary keys:** `id SERIAL PRIMARY KEY`
 - **Foreign keys:** Inline with explicit syntax `FOREIGN KEY (col) REFERENCES table (id)`
 
 ## Audit Columns
 
 Include standard audit fields on all tables:
+
 ```sql
 created_by VARCHAR(50) NOT NULL,
-created_at DATETIME NOT NULL,
+created_at TIMESTAMP NOT NULL,
 modified_by VARCHAR(50),
-modified_at DATETIME
+modified_at TIMESTAMP
 ```
 
 ## Data Types
 
-- **IDs:** INTEGER
+- **IDs:** SERIAL (auto-incrementing)
 - **Short text:** VARCHAR(50)
 - **Medium text:** VARCHAR(300)
 - **Currency:** NUMERIC
 - **State/Enum:** VARCHAR(30)
-- **Timestamps:** DATETIME
+- **Timestamps:** TIMESTAMP
 
 ## Examples
 
 **Table creation:**
+
 ```sql
 CREATE TABLE product (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(300) NOT NULL,
     tenant_id INTEGER NOT NULL,
     created_by VARCHAR(50) NOT NULL,
-    created_at DATETIME NOT NULL,
+    created_at TIMESTAMP NOT NULL,
     FOREIGN KEY (tenant_id) REFERENCES tenant (id)
 );
 ```
 
 **Data insertion:**
+
 ```sql
 INSERT INTO "user" (username, email, created_by, created_at)
 VALUES ('admin', 'admin@example.com', 'liquibase', CURRENT_TIMESTAMP);
 ```
+

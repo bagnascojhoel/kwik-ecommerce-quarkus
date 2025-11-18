@@ -16,11 +16,10 @@ public class User {
 
   private final String email;
 
-  private Password securePassword;
+  private EncryptedSecret securePassword;
 
   public void changePassword(
-      UserAuthenticationService userAuthenticationService,
-      String newPassword) {
-    this.securePassword = userAuthenticationService.generateSecurePassword(newPassword);
+      PasswordEncryptionService passwordEncryptionService, RawSecret password) {
+    this.securePassword = passwordEncryptionService.encryptPassword(password);
   }
 }

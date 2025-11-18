@@ -14,5 +14,4 @@ public class JsonProductCollection {
   public static JsonProductCollection of(List<JsonProduct> products) {
     return new JsonProductCollection(products);
   }
-
 }

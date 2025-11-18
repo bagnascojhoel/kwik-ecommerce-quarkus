@@ -3,6 +3,7 @@
 ## Why This Project Exists
 
 ### Business Problem
+
 Small to medium businesses need affordable e-commerce solutions but:
 - Full-featured platforms are expensive and complex
 - Building custom solutions is time-consuming
@@ -10,6 +11,7 @@ Small to medium businesses need affordable e-commerce solutions but:
 - Fast time-to-market is critical for business success
 
 ### Target Users
+
 1. **Business Owners (Tenants)**: Need to quickly set up and manage product catalogs
 2. **Store Managers**: Manage day-to-day product visibility and information
 3. **Customers**: Browse and view available products
@@ -20,21 +22,24 @@ Small to medium businesses need affordable e-commerce solutions but:
 ### Core Capabilities
 
 #### 1. Multi-Tenant Product Management
+
 - **Create Products**: Name, description, price in BRL, multiple photos
 - **Update Products**: Modify any product attribute
-- **State Management**: 
+- **State Management**:
   - HIDDEN: Default state, not visible to customers
   - SHOWN: Active, visible to customers
   - ARCHIVED: Historical, removed from active catalog
 - **Photo Management**: Associate multiple images with products
 
 #### 2. Tenant Isolation
+
 - Each tenant has completely separate product catalogs
 - Data never mixes between tenants
 - Tenant context enforced at database level
 - Independent operations per tenant
 
 #### 3. Authentication & Security
+
 - JWT token-based authentication
 - Admin user management
 - User identification by username or email
@@ -42,6 +47,7 @@ Small to medium businesses need affordable e-commerce solutions but:
 - Default admin account initialization
 
 #### 4. API Access
+
 - **Management API**: Full CRUD for tenant managers
   - `/api/tenants/{tenantId}/management/products`
 - **Customer API**: Read-only, filtered for SHOWN products
@@ -52,6 +58,7 @@ Small to medium businesses need affordable e-commerce solutions but:
 ### User Workflows
 
 #### Product Lifecycle (Manager)
+
 1. Create product → Starts in HIDDEN state
 2. Add photos and details
 3. Set state to SHOWN → Customers can see it
@@ -60,11 +67,13 @@ Small to medium businesses need affordable e-commerce solutions but:
 6. Set to ARCHIVED → Permanent removal from active catalog
 
 #### Customer Browsing
+
 1. Request products list
 2. Receive only SHOWN products
 3. View product details (name, description, price, photos)
 
 #### Tenant Onboarding
+
 1. Admin creates tenant with ID and name
 2. Tenant gets isolated database space
 3. Managers can start adding products
@@ -72,6 +81,7 @@ Small to medium businesses need affordable e-commerce solutions but:
 ### Key Behaviors
 
 #### Validation
+
 - Product name: Required, not blank
 - Price: Required, positive value, in BRL
 - Description: Optional, max 200 characters
@@ -79,11 +89,13 @@ Small to medium businesses need affordable e-commerce solutions but:
 - State: Defaults to HIDDEN if not specified
 
 #### Identity & Audit
+
 - Every entity tracks creator (Author)
 - Products, Photos, Users have audit fields
 - Identity factory provides current actor context
 
 #### Error Handling
+
 - Resource not found: 404 with structured error response
 - Validation failures: 400 with field-level error details
 - Server errors: 500 with error representation
@@ -91,17 +103,20 @@ Small to medium businesses need affordable e-commerce solutions but:
 ## User Experience Goals
 
 ### For Managers
+
 - **Fast**: Quick product creation and updates
 - **Simple**: Clear state management (show/hide/archive)
 - **Reliable**: Consistent API responses, clear errors
 - **Isolated**: Never see other tenants' data
 
 ### For Customers
+
 - **Clean**: Only see available products (SHOWN state)
 - **Fast**: Quick product list retrieval
 - **Simple**: Straightforward product information
 
 ### For Developers
+
 - **Clear**: Well-documented API with OpenAPI
 - **Consistent**: RESTful conventions
 - **Testable**: Easy to verify behavior
@@ -110,11 +125,13 @@ Small to medium businesses need affordable e-commerce solutions but:
 ## Domain Model Concepts
 
 ### Aggregates
+
 - **Product**: Core aggregate with ProductId, state, details, photos
 - **User**: Authentication aggregate with credentials
 - **Tenant**: Multi-tenancy root aggregate
 
 ### Value Objects
+
 - **ProductId**: Long-based identifier
 - **TenantId**: String-based identifier
 - **ProductState**: Enumeration (SHOWN, HIDDEN, ARCHIVED)
@@ -123,6 +140,7 @@ Small to medium businesses need affordable e-commerce solutions but:
 - **Author**: Creator/modifier tracking
 
 ### Domain Services
+
 - **UserAuthenticationService**: Password verification
 - **ProductManagementUseCases**: Orchestrates product operations
 - **TenantContextHolder**: Manages current tenant context
@@ -136,3 +154,4 @@ Small to medium businesses need affordable e-commerce solutions but:
 5. **Price Format**: Always in Brazilian Reals (BRL), positive values only
 6. **Authentication**: JWT required for management operations
 7. **Admin Bootstrap**: System creates default admin user on startup
+

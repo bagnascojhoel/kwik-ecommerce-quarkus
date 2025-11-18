@@ -3,11 +3,13 @@
 ## Architectural Style: Ports & Adapters (Hexagonal Architecture)
 
 ### Core Principle
+
 The domain model is at the center, completely isolated from external concerns. All infrastructure adapts to the domain, never the reverse.
 
 ## Module Structure
 
 ### Package Organization
+
 ```
 br.com.bagnascojhoel.kwik.ecommerce/
 ├── auth/                    # Authentication & User Management
@@ -41,6 +43,7 @@ module/
 ### Dependency Rules
 
 **Allowed Dependencies:**
+
 ```
 infra_driving → application → domain
 infra_driven → domain
@@ -56,9 +59,11 @@ infra_driven ↔ infra_shared
 ## Key Patterns
 
 ### 1. Repository Pattern
+
 **Purpose:** Abstract data persistence
 
 **Domain Side:**
+
 ```java
 public interface ProductRepository {
     Product insert(Product product);
@@ -69,6 +74,7 @@ public interface ProductRepository {
 ```
 
 **Infrastructure Side:**
+
 ```java
 @ApplicationScoped
 public class PanacheProductRepository 
@@ -78,9 +84,11 @@ public class PanacheProductRepository
 ```
 
 ### 2. Entity Mapping Pattern
+
 **Purpose:** Separate domain models from persistence models
 
 **Domain Entity:**
+
 ```java
 @Getter
 @Builder
@@ -93,6 +101,7 @@ public class Product {
 ```
 
 **Persistence Entity:**
+
 ```java
 @Entity
 @Table(name = "product")
@@ -106,6 +115,7 @@ public class ProductEntity {
 ```
 
 ### 3. Application Service Pattern
+
 **Purpose:** Orchestrate use cases, manage transactions
 
 ```java
@@ -125,9 +135,11 @@ public class ProductManagementUseCases {
 ```
 
 ### 4. REST Adapter Pattern
+
 **Purpose:** Translate HTTP to domain calls
 
 **API Definition (Interface):**
+
 ```java
 @Path("/api/tenants/{tenantId}/management/products")
 public interface ProductManagementRestApi {
@@ -139,6 +151,7 @@ public interface ProductManagementRestApi {
 ```
 
 **Adapter (Implementation):**
+
 ```java
 @AllArgsConstructor
 public class ProductManagementRestAdapter 
@@ -156,6 +169,7 @@ public class ProductManagementRestAdapter
 ```
 
 ### 5. Command Pattern
+
 **Purpose:** Encapsulate operation parameters
 
 ```java
@@ -171,6 +185,7 @@ public class SaveProductCommand {
 ```
 
 ### 6. Multi-Tenancy Pattern
+
 **Purpose:** Data isolation at database level
 
 ```java
@@ -185,6 +200,7 @@ public interface PanacheTenantRepositoryBase<Entity, Id>
 ```
 
 ### 7. Identity Factory Pattern
+
 **Purpose:** Track entity creators/modifiers
 
 ```java
@@ -198,6 +214,7 @@ public class IdentityFactory {
 ```
 
 ### 8. Value Object with Factory Pattern
+
 **Purpose:** Type-safe identifiers
 
 ```java
@@ -214,6 +231,7 @@ public class ProductId {
 ## Component Relationships
 
 ### Authentication Flow
+
 ```
 LoginRequest → JwtRestAdapter 
   → JwtFlowApplicationService 
@@ -223,6 +241,7 @@ LoginRequest → JwtRestAdapter
 ```
 
 ### Product Creation Flow
+
 ```
 JsonProduct → ProductManagementRestAdapter
   → ProductManagementUseCases
@@ -233,6 +252,7 @@ JsonProduct → ProductManagementRestAdapter
 ```
 
 ### Customer Product View Flow
+
 ```
 GET /customer/products → CustomerProductRestAdapter
   → ProductManagementUseCases.findAllProductsToShowCustomers()
@@ -244,37 +264,44 @@ GET /customer/products → CustomerProductRestAdapter
 ## Design Decisions
 
 ### 1. Immutable Domain Objects
+
 - Use Lombok `@Value` and `@Builder`
 - State changes create new instances (`.withState()`)
 - Prevents accidental mutations
 
 ### 2. Panache for Persistence
+
 - Active Record pattern via PanacheEntityBase
 - Repository pattern via PanacheRepository
 - Simplifies common queries
 - Tenant-aware base repository
 
 ### 3. Enum for Product State
+
 - Type-safe state management
 - Prevents invalid states
 - Easy to extend
 
 ### 4. Separate API and Adapter
+
 - Interface defines contract (OpenAPI generation)
 - Implementation handles translation
 - Clear separation of HTTP concerns
 
 ### 5. Command Objects for Input
+
 - Decouples JSON from domain
 - Validates at boundary
 - Immutable transfer objects
 
 ### 6. Application Services for Transactions
+
 - Single transaction boundary
 - Coordinates multiple repositories
 - No transactions in domain
 
 ### 7. Builder Pattern for Complex Objects
+
 - Fluent API for construction
 - Handles optional fields elegantly
 - Works with immutable objects
@@ -282,6 +309,7 @@ GET /customer/products → CustomerProductRestAdapter
 ## Error Handling Strategy
 
 ### Domain Exceptions
+
 ```java
 public class ProductNotFoundException 
     extends AbstractResourceNotFoundException {
@@ -290,11 +318,13 @@ public class ProductNotFoundException
 ```
 
 ### Global Exception Handling
+
 - Maps domain exceptions to HTTP status codes
 - Returns structured error responses
 - Includes validation details
 
 ### Validation Points
+
 1. **Input Layer**: Basic format validation (JSON)
 2. **Domain Layer**: Business rule validation (constructor/methods)
 3. **Application Layer**: Orchestration validation (resource existence)
@@ -302,16 +332,19 @@ public class ProductNotFoundException
 ## Testing Strategy
 
 ### Unit Tests
+
 - Domain logic in isolation
 - Mock repository interfaces
 - BDD style (given/when/then)
 
 ### Integration Tests
+
 - Test repository implementations
 - Use real database (in-memory SQLite)
 - Verify entity mapping
 
 ### BDD/Acceptance Tests
+
 - Gherkin feature files
 - HTTP API testing with REST Assured
 - End-to-end scenarios
@@ -320,6 +353,7 @@ public class ProductNotFoundException
 ## Code Quality Patterns
 
 ### Lombok Annotations
+
 - `@Value`: Immutable value objects
 - `@Builder`: Fluent construction
 - `@AllArgsConstructor`: Constructor injection
@@ -327,12 +361,15 @@ public class ProductNotFoundException
 - `@Slf4j`: Logging
 
 ### Jakarta Annotations
+
 - `@ApplicationScoped`: CDI beans
 - `@Transactional`: Transaction boundaries
 - `@Entity`, `@Table`: JPA mapping
 - `@Path`, `@GET`, `@POST`: REST endpoints
 
 ### Validation
+
 - Jakarta validation in domain (`@NotBlank`, `@Positive`)
 - Custom `Validatable` interface
 - Fail-fast in constructors
+

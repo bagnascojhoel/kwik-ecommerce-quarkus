@@ -1,11 +1,13 @@
 ---
+
 applyTo: '*'
 description: 'Context index for essential files with intents and descriptions.'
----
+-------------------------------------------------------------------------------
 
 You MUST understand your task then use the below index to search for relevant information when answering user prompts.
 
 ## Context Index
+
 intent=DOMAIN_KNOWLEDGE; description=Detailed business context, user workflows, and domain model for the multi-tenant e-commerce product management system.; path=.ai/productContext.md; snapshot=1762733189
 intent=PROJECT_TECHNICAL_CONTEXT; description=Detailed business context, user workflows, and domain model for the multi-tenant e-commerce product management system.; path=.ai/productContext.md; snapshot=1762733189
 intent=DOMAIN_KNOWLEDGE; description=Guidelines for developing high-quality Quarkus applications with Java 17, including standards, patterns, and best practices.; path=.ai/quarkusContext.md; snapshot=1763059724

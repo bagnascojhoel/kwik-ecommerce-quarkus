@@ -6,3 +6,5 @@
 - [ ] Implementation plan should have a dedicated section for:
   - [ ] object mother fixtures
   - [ ] open-api documentation (API-first design)
+  - [ ] the first part of implementation plan should be the BDD tests, divided in @E2e and @Integration. The unit tests should not be in a dedicated session, but rather be besides the production code classes
+

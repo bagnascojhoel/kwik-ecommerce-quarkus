@@ -1,7 +1,8 @@
 ---
+
 description: "Generate optimal Copilot custom instructions from project files or external documentation, following best practices for concise, self-contained, and broadly applicable instructions."
 agent: Context_Engineer
----
+-----------------------
 
 # Copilot Instructions Generator
 
@@ -23,6 +24,7 @@ The source can be:
 Instructions should be short, self-contained statements providing Copilot with relevant information to help it work in the repository. Because instructions are sent with every chat message, they must be broadly applicable to most requests.
 
 ### Include:
+
 - Project/layer overview: purpose, goals, and scope
 - Relevant folder structure and important directories/files
 - Coding standards: conventions, naming, formatting, best practices
@@ -31,6 +33,7 @@ Instructions should be short, self-contained statements providing Copilot with r
 - Domain-specific terminology and concepts
 
 ### Avoid:
+
 - Verbose descriptions and lengthy examples
 - Requests to refer to external resources when formulating responses
 - Instructions about response style or detail level
@@ -49,12 +52,10 @@ Instructions should be short, self-contained statements providing Copilot with r
    - What architectural patterns are used?
    - What naming conventions are followed?
    - What tools and frameworks are central?
-
 2. **Distill Essential Information**
    - What must Copilot know to generate appropriate code?
    - What distinguishes this project from generic implementations?
    - What standards must be consistently followed?
-
 3. **Eliminate Noise**
    - Remove tutorial content and explanations
    - Strip away specific implementation examples

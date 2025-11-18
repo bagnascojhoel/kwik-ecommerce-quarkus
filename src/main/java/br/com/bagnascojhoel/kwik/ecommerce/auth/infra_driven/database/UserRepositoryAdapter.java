@@ -15,25 +15,24 @@ public class UserRepositoryAdapter implements UserRepository {
 
   @Override
   public void persist(User user) {
-    UserEntity userEntity = Optional.ofNullable(user.getUserId())
-        .map(UserId::getValue)
-        .map(userPanacheRepository::findByIdOptional)
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .map(existingUser -> existingUser.updateWith(user))
-        .orElseGet(() -> UserEntity.fromDomain(user));
+    UserEntity userEntity =
+        Optional.ofNullable(user.getUserId())
+            .map(UserId::getValue)
+            .map(userPanacheRepository::findByIdOptional)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(existingUser -> existingUser.updateWith(user))
+            .orElseGet(() -> UserEntity.fromDomain(user));
     userPanacheRepository.persistAndFlush(userEntity);
   }
 
   @Override
   public Optional<User> getByUsername(String username) {
-    return userPanacheRepository.getByUsername(username)
-        .map(UserEntity::toDomain);
+    return userPanacheRepository.getByUsername(username).map(UserEntity::toDomain);
   }
 
   @Override
   public Optional<User> getByEmail(String email) {
-    return userPanacheRepository.getByEmail(email)
-        .map(UserEntity::toDomain);
+    return userPanacheRepository.getByEmail(email).map(UserEntity::toDomain);
   }
 }

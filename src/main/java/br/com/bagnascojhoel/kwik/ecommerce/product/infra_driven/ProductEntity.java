@@ -30,7 +30,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "product")
+@Table(name = "product", schema = "product")
 @Getter
 @Builder(access = AccessLevel.PRIVATE, toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

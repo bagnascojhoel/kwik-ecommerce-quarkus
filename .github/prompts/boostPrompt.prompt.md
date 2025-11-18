@@ -1,6 +1,7 @@
 ---
+
 description: "Comprehensive AI prompt engineering safety review and improvement prompt. Analyzes prompts for effectiveness while providing detailed improvement recommendations with extensive frameworks, testing methodologies, and educational content."
----
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # AI Prompt Engineering Safety Review & Improvement
 
@@ -13,6 +14,7 @@ I want you to improve the user prompt.
 ## Analysis Framework
 
 ### 1. For valid prompts
+
 - Make instructions explicit and unambiguous
 - Add relevant context and constraints
 - Remove redundant information
@@ -22,6 +24,7 @@ I want you to improve the user prompt.
 - Add references to documentation or examples if applicable
 
 ### 2. For invalid or unclear prompts
+
 - Respond with clear, professional guidance
 - Keep responses concise and actionable
 - Maintain a helpful, constructive tone
@@ -29,6 +32,7 @@ I want you to improve the user prompt.
 - Use a standard template for consistency
 
 ### 3. Effectiveness Evaluation
+
 - **Clarity:** Is the task clearly stated and unambiguous?
 - **Context:** Is sufficient background information provided?
 - **Constraints:** Are output requirements and limitations defined?
@@ -36,6 +40,7 @@ I want you to improve the user prompt.
 - **Specificity:** Is the prompt specific enough for consistent results?
 
 ### 4. Advanced Pattern Analysis
+
 - **Prompt Pattern:** Identify the pattern used (zero-shot, few-shot, chain-of-thought, role-based, hybrid)
 - **Pattern Effectiveness:** Evaluate if the chosen pattern is optimal for the task
 - **Pattern Optimization:** Suggest alternative patterns that might improve results
@@ -43,6 +48,7 @@ I want you to improve the user prompt.
 - **Constraint Implementation:** Evaluate the clarity and enforceability of constraints
 
 ### 7. Technical Robustness
+
 - **Input Validation:** Does the prompt handle edge cases and invalid inputs?
 - **Error Handling:** Are potential failure modes considered?
 - **Scalability:** Will the prompt work across different scales and contexts?
@@ -50,6 +56,7 @@ I want you to improve the user prompt.
 - **Versioning:** Are changes trackable and reversible?
 
 ### 8. Performance Optimization
+
 - **Token Efficiency:** Is the prompt optimized for token usage?
 - **Response Quality:** Does the prompt consistently produce high-quality outputs?
 - **Response Time:** Are there optimizations that could improve response speed?
@@ -128,8 +135,8 @@ Provide your analysis in the following structured format:
 
 **Prompt Engineering Principles Applied:**
 1. **Principle:** [Specific principle]
-   - **Application:** [How it was applied]
-   - **Benefit:** [Why it improves the prompt]
+- **Application:** [How it was applied]
+- **Benefit:** [Why it improves the prompt]
 
 2. **Principle:** [Specific principle]
    - **Application:** [How it was applied]
@@ -137,8 +144,8 @@ Provide your analysis in the following structured format:
 
 **Common Pitfalls Avoided:**
 1. **Pitfall:** [Common mistake]
-   - **Why It's Problematic:** [Explanation]
-   - **How We Avoided It:** [Specific avoidance strategy]
+- **Why It's Problematic:** [Explanation]
+- **How We Avoided It:** [Specific avoidance strategy]
 
 ## Instructions
 

@@ -42,3 +42,6 @@ nb-configuration.xml
 
 # SQLITE
 kwik.db
+
+# SQL Sessions
+*.session.sql

@@ -3,6 +3,7 @@
 ## Technology Stack
 
 ### Core Framework
+
 - **Quarkus 3.x**: Supersonic Subatomic Java Framework
   - Fast startup time
   - Low memory footprint
@@ -10,6 +11,7 @@
   - Dev mode with live reload
 
 ### Language & Runtime
+
 - **Java 21**: Latest LTS version
   - Modern language features
   - Pattern matching
@@ -17,6 +19,7 @@
   - Virtual threads support
 
 ### Build System
+
 - **Gradle 8.11**: Build automation
   - Kotlin DSL (build.gradle)
   - Dependency management
@@ -24,6 +27,7 @@
   - Custom tasks for code quality
 
 ### Database
+
 - **SQLite**: Embedded database
   - File-based: `kwik.db`
   - Zero configuration
@@ -35,6 +39,7 @@
   - Organized by module (auth/, product/, tenant/)
 
 ### Persistence Layer
+
 - **Hibernate ORM with Panache**: JPA abstraction
   - Active Record pattern
   - Repository pattern support
@@ -42,6 +47,7 @@
   - `PanacheEntityBase`, `PanacheRepository`
 
 ### Security
+
 - **JWT (JSON Web Tokens)**: Authentication
   - `io.jsonwebtoken:jjwt-api:0.13.0`
   - Token generation and validation
@@ -51,6 +57,7 @@
   - Secure password storage
 
 ### REST API
+
 - **Quarkus REST (formerly RESTEasy Reactive)**: JAX-RS implementation
   - Reactive programming model
   - Non-blocking I/O
@@ -62,12 +69,14 @@
   - OpenAPI spec generation
 
 ### Validation
+
 - **Hibernate Validator**: Bean validation
   - `quarkus-hibernate-validator`
   - Jakarta validation annotations
   - `@NotBlank`, `@Positive`, `@Size`, etc.
 
 ### Testing
+
 - **JUnit 5**: Test framework
   - `quarkus-junit5`
   - `@QuarkusTest` annotation
@@ -80,6 +89,7 @@
   - `quarkus-junit5-mockito`
 
 ### Code Quality
+
 - **Lombok**: Boilerplate reduction
   - `io.freefair.lombok:8.11`
   - `@Value`, `@Builder`, `@Slf4j`
@@ -91,6 +101,7 @@
   - Auto-apply via Gradle
 
 ### Logging
+
 - **SLF4J**: Logging facade
   - Used via `@Slf4j` annotation
 - **JBoss LogManager**: Quarkus default
@@ -98,6 +109,7 @@
 ## Development Environment
 
 ### Prerequisites
+
 - **Java 21 JDK**: Required
 - **Docker**: For containerization and potential future dependencies
 - **Git**: Version control
@@ -106,6 +118,7 @@
 ### Local Setup
 
 #### Initial Setup
+
 ```bash
 # Clone repository
 git clone <repository-url>
@@ -116,6 +129,7 @@ cd kwik-ecommerce-quarkus
 ```
 
 #### Running the Application
+
 ```bash
 # Development mode (with live reload)
 ./gradlew quarkusDev
@@ -127,6 +141,7 @@ cd kwik-ecommerce-quarkus
 ```
 
 #### Building
+
 ```bash
 # Compile and run tests
 ./gradlew build
@@ -145,6 +160,7 @@ cd kwik-ecommerce-quarkus
 ```
 
 ### Database Management
+
 ```bash
 # Liquibase migrations run automatically on startup
 # Manual migration (if needed):
@@ -154,6 +170,7 @@ cd kwik-ecommerce-quarkus
 ```
 
 ### Docker Setup
+
 ```bash
 # Docker Compose available in dev-tools/
 cd dev-tools
@@ -165,6 +182,7 @@ docker-compose up -d
 ## Configuration
 
 ### Application Properties
+
 Location: `src/main/resources/application.properties`
 
 ```properties
@@ -189,6 +207,7 @@ quarkus.swagger-ui.try-it-out-enabled=true
 ### Gradle Configuration
 
 #### Key Dependencies
+
 ```groovy
 dependencies {
     // Quarkus core
@@ -219,6 +238,7 @@ dependencies {
 ### JVM Configuration
 
 #### Development Mode
+
 ```groovy
 quarkusDev {
     jvmArgs = ["-enableassertions"]
@@ -228,6 +248,7 @@ quarkusDev {
 ## Project Structure
 
 ### Source Organization
+
 ```
 src/
 ├── main/
@@ -252,6 +273,7 @@ src/
 ```
 
 ### Documentation
+
 ```
 docs/
 ├── guide-lines.md        # Development guidelines
@@ -264,6 +286,7 @@ docs/
 ```
 
 ### Development Tools
+
 ```
 dev-tools/
 ├── docker-compose.yml
@@ -278,16 +301,19 @@ dev-tools/
 ## Technical Constraints
 
 ### Performance
+
 - Startup time: < 1 second (Quarkus dev mode)
 - Memory: Low footprint (< 100MB typical)
 - Database: File-based, single-user (development)
 
 ### Scalability Considerations
+
 - SQLite: Not production-ready for high concurrency
 - Future migration path to PostgreSQL/MySQL needed
 - Stateless design supports horizontal scaling
 
 ### Production Packaging
+
 ```bash
 # Standard JAR
 ./gradlew build
@@ -307,11 +333,13 @@ dev-tools/
 ## External Interfaces
 
 ### REST API
+
 - Base URL: `http://localhost:8080` (development)
 - OpenAPI Definition: `/q/openapi`
 - Swagger UI: `/q/swagger-ui`
 
 ### Database
+
 - Type: SQLite 3
 - Driver: `org.xerial:sqlite-jdbc:3.49.1.0`
 - Connection: `jdbc:sqlite:kwik.db`
@@ -319,6 +347,7 @@ dev-tools/
 ## Monitoring & Observability
 
 ### Available in Dev Mode
+
 - **Dev UI**: `http://localhost:8080/q/dev/`
   - Config editor
   - Database console
@@ -326,6 +355,7 @@ dev-tools/
   - OpenAPI viewer
 
 ### Logging Configuration
+
 - Default: Console output
 - Level: INFO (can be configured)
 - Format: JBoss LogManager default
@@ -333,11 +363,13 @@ dev-tools/
 ## Security Configuration
 
 ### JWT Settings
+
 - Algorithm: HS256 (HMAC with SHA-256)
 - Token generation: `io.jsonwebtoken.Jwts`
 - Validation: Required for management endpoints
 
 ### Password Security
+
 - Hashing: BCrypt
 - Salt: Auto-generated per password
 - Rounds: Default (typically 10)
@@ -349,3 +381,4 @@ dev-tools/
 3. **File Storage**: Photo URLs only, no file upload/storage yet
 4. **Single Database**: All tenants in one SQLite file
 5. **Development Focus**: Configuration optimized for dev, not production
+

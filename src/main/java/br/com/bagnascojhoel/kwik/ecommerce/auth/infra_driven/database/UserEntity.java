@@ -1,11 +1,12 @@
 package br.com.bagnascojhoel.kwik.ecommerce.auth.infra_driven.database;
 
-import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.Password;
+import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.EncryptedSecret;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.User;
 import br.com.bagnascojhoel.kwik.ecommerce.auth.domain.user.UserId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity(name = "user")
+@Table(schema = "auth")
 public class UserEntity {
 
   @Id
@@ -26,10 +28,7 @@ public class UserEntity {
   private String email;
 
   @Column(name = "password_hash")
-  private byte[] encryptedPassword;
-
-  @Column(name = "password_salt")
-  private byte[] salt;
+  private String encryptedPassword;
 
   @Column(name = "created_by")
   private String createdBy;
@@ -48,8 +47,7 @@ public class UserEntity {
         .userId(user.getUserId().getValue())
         .username(user.getUsername())
         .email(user.getEmail())
-        .encryptedPassword(user.getSecurePassword().encryptedPassword())
-        .salt(user.getSecurePassword().salt())
+        .encryptedPassword(user.getSecurePassword().value())
         .createdBy(null)
         .createdAt(Instant.now())
         .modifiedBy(null)
@@ -62,8 +60,7 @@ public class UserEntity {
         .userId(user.getUserId().getValue())
         .username(user.getUsername())
         .email(user.getEmail())
-        .encryptedPassword(user.getSecurePassword().encryptedPassword())
-        .salt(user.getSecurePassword().salt())
+        .encryptedPassword(user.getSecurePassword().value())
         .createdBy(userEntity.createdBy)
         .createdAt(userEntity.createdAt)
         .modifiedBy(null)
@@ -76,17 +73,16 @@ public class UserEntity {
         .userId(UserId.of(userId))
         .email(email)
         .username(username)
-        .securePassword(new Password(encryptedPassword, salt))
+        .securePassword(new EncryptedSecret(encryptedPassword))
         .build();
   }
 
   public UserEntity updateWith(User user) {
     this.username = user.getUsername();
     this.email = user.getEmail();
-    this.encryptedPassword = user.getSecurePassword().encryptedPassword();
-    this.salt = user.getSecurePassword().salt();
+    this.encryptedPassword = user.getSecurePassword().value();
     this.modifiedBy = null;
     this.modifiedAt = Instant.now();
-    return this;  
+    return this;
   }
 }

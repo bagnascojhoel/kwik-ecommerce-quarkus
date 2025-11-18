@@ -1,4 +1,5 @@
 ---
+
 description: "Prompt to boost Copilot instruction files by refining them to be concise, self-contained, and broadly applicable, following best practices for custom instructions."
 
 ---
@@ -77,6 +78,7 @@ Provide your analysis in the following structured format:
 ### 🔍 **Instruction Analysis Report**
 
 #### Effectiveness Evaluation
+
 - **Token Efficiency:** [Score 1-5/5] - The instructions are concise and focused, minimizing unnecessary token usage.
 - **Self-Contained:** [Score 1-5/5] - The instructions provide all necessary information without relying on external context.
 - **Clarity:** [Score 1-5/5] - The instructions are clear and easy to understand, with a logical structure.
@@ -88,6 +90,7 @@ Provide your analysis in the following structured format:
 > Use icons (★ (match), ☆ (no match)) to represent scores visually.
 
 #### Safety Assessment
+
 - **Harmful Content Risk:** [Low/Medium/High] - [Specific concerns]
 - **Bias Detection:** [None/Minor/Major] - [Specific bias types]
 - **Privacy Risk:** [Low/Medium/High] - [Specific concerns]
@@ -96,10 +99,12 @@ Provide your analysis in the following structured format:
 > Use icons (🔴 (low), 🟡 (medium), 🟢 (high)) to represent scores.
 
 #### Strengths Identified
+
 1. [Strength 1 with explanation]
 2. ...
 
 #### Critical Issues Identified
+
 1. [Issue 1 with severity and impact]
 2. ...
 

@@ -5,11 +5,13 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Embeddable
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@EqualsAndHashCode
 public class TenantId {
 
   @Column(name = "tenant_id")
